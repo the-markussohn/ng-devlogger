@@ -18,7 +18,7 @@ export class LogFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._logService.selectedLog.subscribe(log => {
+    this._logService.selectedLog$.subscribe(log => {
       if (log.id !== null) {
         this.isNew = false;
         this.id = log.id;
@@ -45,6 +45,15 @@ export class LogFormComponent implements OnInit {
       this._logService.updateLog(updLog);
     }
 
+    this.clearState();
+  }
+
+  clearState() {
+    this.isNew = true;
+    this.id = '';
+    this.text = '';
+    this.date = '';
+    this._logService.clearState();
   }
 
   generateId() {
